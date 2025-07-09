@@ -36,6 +36,9 @@ function App() {
 			{/* Hero Selection Overlay */}
 			<HeroSelection />
 
+			{/* Setup Phase Overlay */}
+			<SetupPhase />
+
 			{/* Turn indicator overlay - only show during gameplay */}
 			{phase === 'gameplay' && currentPlayer && (
 				<div

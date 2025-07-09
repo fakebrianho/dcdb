@@ -78,6 +78,10 @@ export const GameEngineProvider = ({ children }) => {
 		'selectedHeroes',
 		[]
 	)
+	const [setupComplete, setSetupComplete] = useMultiplayerState(
+		'setupComplete',
+		false
+	)
 	const [debugMode, setDebugMode] = useMultiplayerState('debugMode', true) // Temporarily enabled
 	const players = usePlayersList(true)
 	players.sort((a, b) => a.id.localeCompare(b.id))
@@ -89,6 +93,7 @@ export const GameEngineProvider = ({ children }) => {
 		players,
 		phase,
 		selectedHeroes,
+		setupComplete,
 		debugMode,
 		AVAILABLE_HEROES,
 	}
@@ -129,16 +134,45 @@ export const GameEngineProvider = ({ children }) => {
 		const nextPlayerTurn = (playerTurn + 1) % players.length
 		setPlayerTurn(nextPlayerTurn, true)
 
-		// If all players have selected, automatically move to gameplay
+		// If all players have selected, move to setup phase
 		if (newSelectedHeroes.length >= players.length) {
-			setPhase('gameplay', true)
-			setPlayerTurn(0, true) // Reset to first player for gameplay
-			console.log('🎮 All heroes selected! Moving to gameplay!')
+			setPhase('setupPhase', true)
+			setPlayerTurn(0, true) // Reset to first player for setup
+			console.log('🎮 All heroes selected! Moving to setup phase.')
 		} else {
 			console.log(
 				`🎯 ${getPlayerName(currentPlayer)} selected ${
 					hero.name
 				}! Next player's turn.`
+			)
+		}
+	}
+
+	// Handle setup phase completion
+	const completeSetup = () => {
+		if (phase !== 'setupPhase') return
+
+		const currentPlayer = players[playerTurn]
+		if (!currentPlayer) return
+
+		// Mark setup as complete for current player
+		const newSetupComplete = [...setupComplete, currentPlayer.id]
+		setSetupComplete(newSetupComplete, true)
+
+		// Move to next player's setup
+		const nextPlayerTurn = (playerTurn + 1) % players.length
+		setPlayerTurn(nextPlayerTurn, true)
+
+		// If all players have completed setup, move to gameplay
+		if (newSetupComplete.length >= players.length) {
+			setPhase('gameplay', true)
+			setPlayerTurn(0, true) // Reset to first player for gameplay
+			console.log('🎮 Setup complete! Moving to gameplay phase.')
+		} else {
+			console.log(
+				`🎯 ${getPlayerName(
+					currentPlayer
+				)} completed setup! Next player's turn.`
 			)
 		}
 	}
@@ -156,6 +190,7 @@ export const GameEngineProvider = ({ children }) => {
 			setPlayerTurn(randomPlayer, true)
 			setPhase('heroSelection', true)
 			setSelectedHeroes([], true)
+			setSetupComplete([], true)
 
 			// Log which player's turn it is
 			const currentPlayer = players[randomPlayer]
@@ -201,6 +236,7 @@ export const GameEngineProvider = ({ children }) => {
 				...gameState,
 				getAvailableHeroes,
 				selectHero,
+				completeSetup,
 				toggleDebugMode,
 			}}
 		>

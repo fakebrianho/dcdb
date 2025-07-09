@@ -129,11 +129,11 @@ export const GameEngineProvider = ({ children }) => {
 		const nextPlayerTurn = (playerTurn + 1) % players.length
 		setPlayerTurn(nextPlayerTurn, true)
 
-		// If all players have selected, automatically move to gameplay
+		// If all players have selected, automatically move to setup phase
 		if (newSelectedHeroes.length >= players.length) {
-			setPhase('gameplay', true)
-			setPlayerTurn(0, true) // Reset to first player for gameplay
-			console.log('🎮 All heroes selected! Moving to gameplay!')
+			setPhase('setup', true)
+			setPlayerTurn(0, true) // Reset to first player for setup
+			console.log('🎮 All heroes selected! Moving to setup phase.')
 		} else {
 			console.log(
 				`🎯 ${getPlayerName(currentPlayer)} selected ${

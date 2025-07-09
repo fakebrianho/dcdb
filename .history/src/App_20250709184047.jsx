@@ -4,6 +4,7 @@ import HolographicCard from './components/HolographicCard'
 import { Environment } from '@react-three/drei'
 import { useGameEngine } from './hooks/useGameEngine'
 import HeroSelection from './components/HeroSelection'
+import SetupPhase from './components/SetupPhase'
 import DebugOverlay from './components/DebugOverlay'
 
 // Helper function to get player display name (same as in useGameEngine)
@@ -35,6 +36,9 @@ function App() {
 
 			{/* Hero Selection Overlay */}
 			<HeroSelection />
+
+			{/* Setup Phase Overlay */}
+			<SetupPhase />
 
 			{/* Turn indicator overlay - only show during gameplay */}
 			{phase === 'gameplay' && currentPlayer && (
