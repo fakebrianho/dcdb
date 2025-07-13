@@ -23,40 +23,46 @@ const getPlayerName = (player) => {
 // Available heroes pool
 const AVAILABLE_HEROES = [
 	{
-		id: 'batman',
-		name: 'Batman',
+		id: 'dragon-warrior',
+		name: 'Dragon Warrior',
 		color: '#FF4444',
 		description: 'Fierce warrior with dragon powers',
 	},
 	{
-		id: 'aquaman',
-		name: 'Aquaman',
+		id: 'cyber-mage',
+		name: 'Cyber Mage',
 		color: '#4444FF',
 		description: 'Master of digital magic',
 	},
 	{
-		id: 'cyborg',
-		name: 'Cyborg',
+		id: 'neon-assassin',
+		name: 'Neon Assassin',
 		color: '#FF44FF',
 		description: 'Stealthy killer from the neon streets',
 	},
 	{
-		id: 'greenlantern',
-		name: 'Green Lantern',
+		id: 'crystal-knight',
+		name: 'Crystal Knight',
 		color: '#44FFFF',
 		description: 'Noble protector with crystal armor',
 	},
 	{
-		id: 'superman',
-		name: 'Super Man',
+		id: 'shadow-witch',
+		name: 'Shadow Witch',
 		color: '#8844FF',
 		description: 'Dark magic wielder',
 	},
 	{
-		id: 'wonderwoman',
-		name: 'Wonder Woman',
+		id: 'flame-archer',
+		name: 'Flame Archer',
 		color: '#FF8844',
 		description: 'Archer with fire arrows',
+	},
+	{
+		id: 'ice-giant',
+		name: 'Ice Giant',
+		color: '#44FF88',
+		description: 'Massive warrior with ice powers',
 	},
 ]
 

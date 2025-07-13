@@ -40,6 +40,12 @@ const AVAILABLE_HEROES = [
 		color: '#FF8844',
 		description: 'Archer with fire arrows',
 	},
+	{
+		id: 'ice-giant',
+		name: 'Ice Giant',
+		color: '#44FF88',
+		description: 'Massive warrior with ice powers',
+	},
 ]
 
 export default function DebugOverlay() {
